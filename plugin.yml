@@ -1,0 +1,30 @@
+name: Creeper Prank
+main: me.spike.creeperprank.CreeperPrank
+version: 0.1
+author: SpikeMeister
+description: >
+             A mischievous plugin to prank your users. Creates a chance to spawn a creeper on the block the
+             user is looking at.
+commands:
+  creeperprank:
+    description: Adds a player to the list of prankees Probability optional. Default probability is 0.01.
+    usage: |
+           /<command> [player name] [probability]
+           Example: /<command> name 0.1 - Adds "name" to the list of players to be pranked with probability 0.1.
+           Example: /<command> name - Adds "name" to the list of players to be pranked with probability 0.01.
+  setspawnprob:
+    description: Sets the probability that player will spawn a creeper.
+    usage: |
+           /<command> [player name] [probability]
+           Example: /<command> name 0.01 - Sets the probability of "name" spawning a creeper to 1 in 100.
+  stoppranking:
+    description: Sets the probability of a player spawning a creeper to 0.
+    usage: |
+           /<command> [player name]
+           Example: /<command> name
+  beingpranked:
+    description: Checks if a player is being pranked and returns the probability they will spawn a creeper.
+    usage: |
+           /<command> [player name]
+           Example: /<command> name
+           
