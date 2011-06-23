@@ -1,7 +1,7 @@
 ## Creepers Gonna Creep
 
 # Description
-Creepers Gonna Creep is a plugin that lets ops prank their users by making users spawn creepers near them whenever they move. Whether or not a creeper spawns is determined by a probability bestowed upon the user. Use a low probability (0.005 ish) to give the user an occasional heart attack and make them wonder why they have such bad luck. Use anything over 0.01 to crash the server :D
+Creepers Gonna Creep is a Minecraft Bukkit plugin that lets ops prank their users by making them spawn creepers occasionally when they move. Whether or not a creeper spawns is determined by a probability bestowed upon the user. Use a low probability (0.005 ish) to give the user an occasional heart attack and make them wonder why they have such bad luck. Use anything over 0.01 to crash the server :D
 
 Written by Andrew (SpikeMeister/Spike) as a test to become more familiar with the Bukkit API and writing plugins for MineCraft. Feedback welcome.
 
