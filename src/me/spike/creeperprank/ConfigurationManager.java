@@ -23,7 +23,12 @@ public class ConfigurationManager {
 	private void saveConfiguration() {
 		try {
 			FileOutputStream cfgWriter = new FileOutputStream(cfg);
+			if (!properties.containsKey("default_probability")) {
+				properties.setProperty("default_probability", "0.005");
+			}
 			properties.store(cfgWriter, "Be careful when manually editing this file!");
+			cfgWriter.flush();
+			cfgWriter.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -52,7 +57,7 @@ public class ConfigurationManager {
 	 * @param name The name of the player to be added.
 	 */
 	public void addPlayer(String name) {
-		properties.setProperty(name, "0.005");
+		properties.setProperty(name, properties.getProperty("default_probability"));
 		saveConfiguration();
 	}
 

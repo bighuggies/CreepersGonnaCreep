@@ -3,6 +3,7 @@ package me.spike.creeperprank;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,7 +21,8 @@ public class CreeperPrank extends JavaPlugin {
 	 * Executed when the plugin is disabled.
 	 */
 	public void onDisable() {
-		System.out.println("Creeper Prank version 0.1 is disabled!");
+		PluginDescriptionFile pdfFile = this.getDescription();
+		System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is disabled!" );
 	}
 
 	/**
@@ -37,7 +39,8 @@ public class CreeperPrank extends JavaPlugin {
 		CreeperPrankPlayerListener playerListener = new CreeperPrankPlayerListener(configMan);
 		pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Event.Priority.Normal, this);
 
-		System.out.println("Creeper Prank version 0.1 is enabled!");
+		PluginDescriptionFile pdfFile = this.getDescription();
+		System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );
 	}
 
 	/**
@@ -60,12 +63,12 @@ public class CreeperPrank extends JavaPlugin {
 				} catch (NumberFormatException e) {
 					sender.sendMessage("Please enter a number between 0 and 1!");
 				}
-			// All one argument commands.
+				// All one argument commands.
 			} else if (args.length == 1) {
 				// Add a player to be pranked with the default probability of spawning a creeper.
 				if (command.getName().equalsIgnoreCase("creeperprank")) {
 					configMan.addPlayer(args[0]);
-					sender.sendMessage(args[0] + " is being creeper pranked with a 0.005 probability of spawning a creeper!");
+					sender.sendMessage(args[0] + " is being creeper pranked with the default probability of spawning a creeper!");
 					return true;
 				}
 				// Stop pranking a player.

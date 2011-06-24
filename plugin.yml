@@ -1,6 +1,6 @@
 name: Creepers Gonna Creep
 main: me.spike.creeperprank.CreeperPrank
-version: 0.1
+version: 1.0
 author: SpikeMeister
 description: >
              Creepers Gonna Creep lets ops prank their users by making them spawn creepers occasionally when they move.
