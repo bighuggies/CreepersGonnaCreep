@@ -38,10 +38,10 @@ public class CreeperPrankPlayerListener extends PlayerListener {
 		String probability = configMan.checkPlayer(p.getName());
 
 		if (probability != null) {
-			World w = p.getWorld();
-			Block b = p.getTargetBlock(null, 256);
-
 			if (rand.nextDouble() < Double.valueOf(probability)) {
+				World w = p.getWorld();
+				Block b = p.getTargetBlock(null, 256);
+
 				w.spawnCreature(b.getLocation(), CreatureType.CREEPER);
 			}
 		}
