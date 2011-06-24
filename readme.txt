@@ -1,7 +1,7 @@
 ## Creepers Gonna Creep
 
 # Description
-Creepers Gonna Creep is a Minecraft Bukkit plugin that lets ops prank their users by making them spawn creepers occasionally when they move. Whether or not a creeper spawns is determined by a probability bestowed upon the user. Use a low probability (0.005 ish) to give the user an occasional heart attack and make them wonder why they have such bad luck. Use anything over 0.01 to crash the server :D
+Creepers Gonna Creep is a Minecraft Bukkit plugin that lets ops prank their users by making them spawn creepers occasionally when they move. Whether or not a creeper spawns is determined by a probability bestowed upon the user. Use a low probability (0.005 ish) to give the user an occasional heart attack and make them wonder why they have such bad luck. Use anything over 0.001 to crash the server :D
 
 Written by Andrew (SpikeMeister/Spike) as a test to become more familiar with the Bukkit API and writing plugins for MineCraft. Feedback welcome.
 
@@ -10,7 +10,7 @@ Written by Andrew (SpikeMeister/Spike) as a test to become more familiar with th
 
 # Commands
   creeperprank:
-    description: Adds a player to the list of prankees Probability optional. Default probability is 0.01.
+    description: Adds a player to the list of prankees Probability optional. Default probability is 0.005.
     usage: |
            /<command> [player name] [probability]
            Example: /<command> name 0.1 - Adds "name" to the list of players to be pranked with probability 0.1.
@@ -29,4 +29,5 @@ Written by Andrew (SpikeMeister/Spike) as a test to become more familiar with th
     description: Checks if a player is being pranked and returns the probability they will spawn a creeper.
     usage: |
            /<command> [player name]
+>>>>>>> 7814bf9e2de627c6cd9e437b1205ae1d0144fd6a
            Example: /<command> name
