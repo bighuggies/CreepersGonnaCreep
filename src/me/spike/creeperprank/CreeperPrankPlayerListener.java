@@ -16,7 +16,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
  * @author Andrew "Spike"
  */
 public class CreeperPrankPlayerListener extends PlayerListener {
-	ConfigurationManager configMan;
+	private ConfigurationManager configMan;
+	private Random rand = new Random(System.currentTimeMillis());
 
 	/**
 	 * Constructor with a specified configuration manager.
@@ -39,8 +40,6 @@ public class CreeperPrankPlayerListener extends PlayerListener {
 		if (probability != null) {
 			World w = p.getWorld();
 			Block b = p.getTargetBlock(null, 256);
-
-			Random rand = new Random(System.currentTimeMillis());
 
 			if (rand.nextDouble() < Double.valueOf(probability)) {
 				w.spawnCreature(b.getLocation(), CreatureType.CREEPER);

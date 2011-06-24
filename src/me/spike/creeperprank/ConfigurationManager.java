@@ -48,11 +48,11 @@ public class ConfigurationManager {
 
 	/**
 	 * Add a player to the list of players to be pranked with a default
-	 * probability of spawning a creeper (0.0005).
+	 * probability of spawning a creeper (0.005).
 	 * @param name The name of the player to be added.
 	 */
 	public void addPlayer(String name) {
-		properties.setProperty(name, "0.0005");
+		properties.setProperty(name, "0.005");
 		saveConfiguration();
 	}
 

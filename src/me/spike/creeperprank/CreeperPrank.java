@@ -65,7 +65,7 @@ public class CreeperPrank extends JavaPlugin {
 				// Add a player to be pranked with the default probability of spawning a creeper.
 				if (command.getName().equalsIgnoreCase("creeperprank")) {
 					configMan.addPlayer(args[0]);
-					sender.sendMessage(args[0] + " is being creeper pranked with a 0.0005 probability of spawning a creeper!");
+					sender.sendMessage(args[0] + " is being creeper pranked with a 0.005 probability of spawning a creeper!");
 					return true;
 				}
 				// Stop pranking a player.
