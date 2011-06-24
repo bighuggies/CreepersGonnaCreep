@@ -6,6 +6,7 @@ Creepers Gonna Creep is a Minecraft Bukkit plugin that lets ops prank their user
 Written by Andrew (SpikeMeister/Spike) as a test to become more familiar with the Bukkit API and writing plugins for MineCraft. Feedback welcome.
 
 # Changelog
+1.0.1 - Made the default probability a property
 1.0 - Initial release
 
 # Commands
