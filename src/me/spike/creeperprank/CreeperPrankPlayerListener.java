@@ -34,14 +34,15 @@ public class CreeperPrankPlayerListener extends PlayerListener {
 	 */
 	public void onPlayerMove(PlayerMoveEvent event) {
 		Player p = event.getPlayer();
+		String probability = configMan.checkPlayer(p.getName());
 
-		if (configMan.checkPlayer(p.getName()) != null) {
+		if (probability != null) {
 			World w = p.getWorld();
 			Block b = p.getTargetBlock(null, 256);
 
 			Random rand = new Random(System.currentTimeMillis());
 
-			if (rand.nextDouble() < Double.valueOf(configMan.getSpawnProbability(p.getName()))) {
+			if (rand.nextDouble() < Double.valueOf(probability)) {
 				w.spawnCreature(b.getLocation(), CreatureType.CREEPER);
 			}
 		}
