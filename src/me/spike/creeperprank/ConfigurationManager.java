@@ -15,7 +15,7 @@ import java.util.Properties;
  */
 public class ConfigurationManager {
 	private final Properties properties = new Properties();
-	private final File cfg = new File("plugins" + File.separator + "creeperprank.cfg");
+	private final File cfg = new File("plugins" + File.separator + "creepersgonnacreep.cfg");
 
 	/**
 	 * Save the configuration file to disk in a file named creeperprank.cfg.
