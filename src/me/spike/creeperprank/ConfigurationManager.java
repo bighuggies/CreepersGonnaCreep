@@ -55,7 +55,7 @@ public class ConfigurationManager {
 		properties.setProperty(name, "0.01");
 		saveConfiguration();
 	}
-	
+
 	/**
 	 * Add a player to the list of players to be pranked with a specified
 	 * probability of spawning a creeper. If the player is already on the list
@@ -69,7 +69,7 @@ public class ConfigurationManager {
 	}
 
 	/**
-	 * Remove a player from the list of players to be pranked.
+	 * Set a player's probability of spawning a creeper to 0.
 	 * @param name The name of the player to be removed.
 	 */
 	public void removePlayer(String name) {
@@ -80,20 +80,12 @@ public class ConfigurationManager {
 	/**
 	 * Check if the player is in the list and if they are to be pranked.
 	 * @param name The name of the player being checked for.
-	 * @return True if the player is to be pranked, false otherwise.
+	 * @return String The probability of a player spawning a creeper or null if they are not on the list.
 	 */
 	public String checkPlayer(String name) {
 		if (properties.containsKey(name)) {
 			return properties.getProperty(name);
 		}
 		return null;
-	}
-	
-	/**
-	 * Get the current probability of a creeper spawning on a player move event.
-	 * @return String representing the spawn probability.
-	 */
-	public String getSpawnProbability(String name) {
-		return properties.getProperty(name);
 	}
 }
