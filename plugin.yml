@@ -3,7 +3,7 @@ main: me.spike.creeperprank.CreeperPrank
 version: 1.0.1
 author: SpikeMeister
 description: >
-             Creepers Gonna Creep lets ops prank their users by making them spawn creepers occasionally when they move.
+             Creepers Gonna Creep is a Minecraft Bukkit plugin that lets ops prank their users by spawning creepers around them randomly when they move.
 commands:
   creeperprank:
     description: Adds a player to the list of prankees Probability optional. Default probability is 0.005.
