@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
  * Listens for PlayerMoveEvents and either spawns a creeper or not depending
  * on the current configuration of the plugin.
  * 
- * @author Andrew
+ * @author Andrew "Spike"
  */
 public class CreeperPrankPlayerListener extends PlayerListener {
 	ConfigurationManager configMan;

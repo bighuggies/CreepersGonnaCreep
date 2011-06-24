@@ -11,7 +11,7 @@ import java.util.Properties;
  * Manages the configuration of the plugin, ie who is currently being pranked
  * and what the probability any given player being pranked will spawn a creeper.
  * 
- * @author Andrew
+ * @author Andrew "Spike"
  */
 public class ConfigurationManager {
 	private final Properties properties = new Properties();
