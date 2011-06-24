@@ -6,11 +6,11 @@ description: >
              Creepers Gonna Creep lets ops prank their users by making them spawn creepers occasionally when they move.
 commands:
   creeperprank:
-    description: Adds a player to the list of prankees Probability optional. Default probability is 0.01.
+    description: Adds a player to the list of prankees Probability optional. Default probability is 0.0005.
     usage: |
            /<command> [player name] [probability]
            Example: /<command> name 0.1 - Adds "name" to the list of players to be pranked with probability 0.1.
-           Example: /<command> name - Adds "name" to the list of players to be pranked with probability 0.01.
+           Example: /<command> name - Adds "name" to the list of players to be pranked with probability 0.0005.
   setspawnprob:
     description: Sets the probability that player will spawn a creeper.
     usage: |
