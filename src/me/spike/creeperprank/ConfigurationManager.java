@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Properties;
 
 /**
@@ -59,8 +60,7 @@ public class ConfigurationManager {
 	}
 
 	/**
-	 * Add a player to the list of players to be pranked with a default
-	 * probability of spawning a creeper (0.005).
+	 * Add a player to the list of players to be pranked.
 	 * @param name The name of the player to be added.
 	 */
 	public void addPlayer(String name) {
@@ -69,11 +69,23 @@ public class ConfigurationManager {
 	}
 
 	/**
-	 * Set a player's probability of spawning a creeper to 0.
+	 * Stop pranking a player.
 	 * @param name The name of the player to be removed.
 	 */
 	public void removePlayer(String name) {
 		properties.setProperty(name, "false");
+		saveConfiguration();
+	}
+	
+	/**
+	 * Stop pranking all players.
+	 */
+	public void removeAll() {
+		Enumeration<?> e = properties.propertyNames();
+		while (e.hasMoreElements()) {
+			String key = (String) e.nextElement();
+			properties.setProperty(key, "false");
+		}
 		saveConfiguration();
 	}
 

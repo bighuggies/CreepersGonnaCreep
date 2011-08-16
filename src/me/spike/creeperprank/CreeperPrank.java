@@ -57,14 +57,24 @@ public class CreeperPrank extends JavaPlugin {
 
 			// Stop pranking a player
 			if (command.getName().equalsIgnoreCase("stoppranking")) {
+				if (args[0].equalsIgnoreCase("all")) {
+					configMan.removeAll();
+					sender.sendMessage("All players are no longer being pranked!");
+					return true;
+				}
+
 				if (configMan.checkPlayer(args[0]) == false) {
 					sender.sendMessage(args[0] + " is not being pranked!");
 				} else {
 					configMan.removePlayer(args[0]);
 					sender.sendMessage(args[0] + " is no longer being pranked!");
 				}
+				
 				return true;
 			}
+		} else if (command.getName().equalsIgnoreCase("creeperprank") || command.getName().equalsIgnoreCase("stoppranking")) {
+			sender.sendMessage("You do not have permission to do that!");
+			return true;
 		}
 
 		if (sender.hasPermission("creeperprank.beingpranked")) {
@@ -72,13 +82,17 @@ public class CreeperPrank extends JavaPlugin {
 			if (command.getName().equalsIgnoreCase("beingpranked")) {
 				boolean beingPranked = configMan.checkPlayer(args[0]);
 				if (beingPranked == false) {
-					sender.sendMessage(args[0] + " is not being pranked");
+					sender.sendMessage(args[0] + " is not being pranked!");
 				} else {
-					sender.sendMessage(args[0] + " is being pranked");
+					sender.sendMessage(args[0] + " is being pranked!");
 				}
 				return true;
 			}
+		} else if (command.getName().equalsIgnoreCase("beingpranked")) {
+			sender.sendMessage("You do not have permission to do that!");
+			return true;
 		}
+
 		return false;
 	}
 }
