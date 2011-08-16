@@ -8,22 +8,28 @@ commands:
   creeperprank:
     description: Adds a player to the list of prankees Probability optional. Default probability is 0.005.
     usage: |
-           /<command> [player name] [probability]
-           Example: /<command> name 0.1 - Adds "name" to the list of players to be pranked with probability 0.1.
-           Example: /<command> name - Adds "name" to the list of players to be pranked with probability 0.005.
-  setspawnprob:
-    description: Sets the probability that player will spawn a creeper.
-    usage: |
-           /<command> [player name] [probability]
-           Example: /<command> name 0.01 - Sets the probability of "name" spawning a creeper to 1 in 100.
+           /<command> [player name]
+           Example: /<command> name - Adds "name" to the list of players to be pranked.
   stoppranking:
     description: Sets the probability of a player spawning a creeper to 0.
     usage: |
            /<command> [player name]
            Example: /<command> name
   beingpranked:
-    description: Checks if a player is being pranked and returns the probability they will spawn a creeper.
+    description: Checks if a player is being pranked.
     usage: |
            /<command> [player name]
            Example: /<command> name
-           
+
+permissions:
+    creeperprank.*:
+        description: Gives access to all creeper prank commands
+        children:
+            creeperprank.creeperprank: true
+            creeperprank.beingpranked: true
+    creeperprank.creeperprank:
+        description: Allows you to start and stop creeper pranking a user
+        default: op
+    creeperprank.beingpranked:
+        description: Allows you to check whether a user is being creeper pranked
+        default: op

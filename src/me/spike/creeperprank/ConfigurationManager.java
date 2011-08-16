@@ -8,14 +8,24 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Manages the configuration of the plugin, ie who is currently being pranked
+ * A singleton that manages the configuration of the plugin, ie who is currently being pranked
  * and what the probability any given player being pranked will spawn a creeper.
  * 
  * @author Andrew "Spike"
  */
 public class ConfigurationManager {
+	// Track the singleton instance
+	private static final ConfigurationManager instance = new ConfigurationManager();
+
 	private final Properties properties = new Properties();
 	private final File cfg = new File("plugins" + File.separator + "creepersgonnacreep.cfg");
+
+	// Private constructor
+	private ConfigurationManager() {}
+
+	public static ConfigurationManager getConfigurationManager(){
+		return instance;
+	}
 
 	/**
 	 * Save the configuration file to disk in a file named creeperprank.cfg.
@@ -23,9 +33,6 @@ public class ConfigurationManager {
 	private void saveConfiguration() {
 		try {
 			FileOutputStream cfgWriter = new FileOutputStream(cfg);
-			if (!properties.containsKey("default_probability")) {
-				properties.setProperty("default_probability", "0.005");
-			}
 			properties.store(cfgWriter, "Be careful when manually editing this file!");
 			cfgWriter.flush();
 			cfgWriter.close();
@@ -57,19 +64,7 @@ public class ConfigurationManager {
 	 * @param name The name of the player to be added.
 	 */
 	public void addPlayer(String name) {
-		properties.setProperty(name, properties.getProperty("default_probability"));
-		saveConfiguration();
-	}
-
-	/**
-	 * Add a player to the list of players to be pranked with a specified
-	 * probability of spawning a creeper. If the player is already on the list
-	 * their probability will be changed.
-	 * @param name The name of the player to be added.
-	 * @param probability The probability that this player will spawn a creeper.
-	 */
-	public void addPlayer(String name, String probability) {
-		properties.setProperty(name, probability);
+		properties.setProperty(name, "true");
 		saveConfiguration();
 	}
 
@@ -78,7 +73,7 @@ public class ConfigurationManager {
 	 * @param name The name of the player to be removed.
 	 */
 	public void removePlayer(String name) {
-		properties.setProperty(name, "0");
+		properties.setProperty(name, "false");
 		saveConfiguration();
 	}
 
@@ -87,10 +82,15 @@ public class ConfigurationManager {
 	 * @param name The name of the player being checked for.
 	 * @return String The probability of a player spawning a creeper or null if they are not on the list.
 	 */
-	public String checkPlayer(String name) {
+	public boolean checkPlayer(String name) {
 		if (properties.containsKey(name)) {
-			return properties.getProperty(name);
+			String beingPranked = properties.getProperty(name);
+			if (beingPranked.equalsIgnoreCase("true")) {
+				return true;
+			} else if (beingPranked.equalsIgnoreCase("false")) {
+				return false;
+			}
 		}
-		return null;
+		return false;
 	}
 }

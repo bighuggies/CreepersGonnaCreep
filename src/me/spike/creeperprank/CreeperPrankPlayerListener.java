@@ -16,16 +16,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
  * @author Andrew "Spike"
  */
 public class CreeperPrankPlayerListener extends PlayerListener {
-	private ConfigurationManager configMan;
+	private static final ConfigurationManager configMan = ConfigurationManager.getConfigurationManager();
 	private Random rand = new Random(System.currentTimeMillis());
-
-	/**
-	 * Constructor with a specified configuration manager.
-	 * @param configMan The configuration manager.
-	 */
-	public CreeperPrankPlayerListener(ConfigurationManager configMan) {
-		this.configMan = configMan;
-	}
+	private static final double DEFAULT_PROBABILITY = 0.005;
 
 	/**
 	 * Each time a player moves, check if they are on the list of prankees. If they are,
@@ -35,10 +28,10 @@ public class CreeperPrankPlayerListener extends PlayerListener {
 	 */
 	public void onPlayerMove(PlayerMoveEvent event) {
 		Player p = event.getPlayer();
-		String probability = configMan.checkPlayer(p.getName());
+		boolean beingPranked = configMan.checkPlayer(p.getName());
 
-		if (probability != null) {
-			if (rand.nextDouble() < Double.valueOf(probability)) {
+		if (beingPranked == true) {
+			if (rand.nextDouble() < DEFAULT_PROBABILITY) {
 				World w = p.getWorld();
 				Block b = p.getTargetBlock(null, 256);
 

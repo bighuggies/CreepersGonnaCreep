@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CreeperPrank extends JavaPlugin {
 	// Create a ConfigurationManager to handle configuration of the plugin.
-	private final ConfigurationManager configMan = new ConfigurationManager();
+	private final ConfigurationManager configMan = ConfigurationManager.getConfigurationManager();
 
 	/**
 	 * Executed when the plugin is disabled.
@@ -36,7 +36,7 @@ public class CreeperPrank extends JavaPlugin {
 		configMan.loadConfiguration();
 
 		// Create and register a playerlistener.
-		CreeperPrankPlayerListener playerListener = new CreeperPrankPlayerListener(configMan);
+		CreeperPrankPlayerListener playerListener = new CreeperPrankPlayerListener();
 		pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Event.Priority.Normal, this);
 
 		PluginDescriptionFile pdfFile = this.getDescription();
@@ -47,64 +47,38 @@ public class CreeperPrank extends JavaPlugin {
 	 * React to user commands, see plugin.yml for more.
 	 */
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		// All commands only available to ops.
-		if (sender.isOp()) {
-			// All two argument commands.
-			if (args.length >= 2) {
-				try {
-					// Adding a player to be pranked with a custom spawn probability or changing the probability of a player already being pranked.
-					if ((command.getName().equalsIgnoreCase("creeperprank") || command.getName().equalsIgnoreCase("setspawnprob"))) {
-						// Make sure the number given is valid.
-						checkProbability(Double.parseDouble(args[1]));
-						configMan.addPlayer(args[0], args[1]);
-						sender.sendMessage(args[0] + " is being creeper pranked with a " + args[1] + " probability of spawning a creeper!");
-						return true;
-					}
-				} catch (NumberFormatException e) {
-					sender.sendMessage("Please enter a number between 0 and 1!");
+		if (sender.hasPermission("creeperprank.creeperprank") && args.length >= 1) {
+			// Prank a player
+			if (command.getName().equalsIgnoreCase("creeperprank")) {
+				configMan.addPlayer(args[0]);
+				sender.sendMessage(args[0] + " is being creeper pranked!");
+				return true;
+			}
+
+			// Stop pranking a player
+			if (command.getName().equalsIgnoreCase("stoppranking")) {
+				if (configMan.checkPlayer(args[0]) == false) {
+					sender.sendMessage(args[0] + " is not being pranked!");
+				} else {
+					configMan.removePlayer(args[0]);
+					sender.sendMessage(args[0] + " is no longer being pranked!");
 				}
-				// All one argument commands.
-			} else if (args.length == 1) {
-				// Add a player to be pranked with the default probability of spawning a creeper.
-				if (command.getName().equalsIgnoreCase("creeperprank")) {
-					configMan.addPlayer(args[0]);
-					sender.sendMessage(args[0] + " is being creeper pranked with the default probability of spawning a creeper!");
-					return true;
+				return true;
+			}
+		}
+
+		if (sender.hasPermission("creeperprank.beingpranked")) {
+			//Check if a player is being pranked
+			if (command.getName().equalsIgnoreCase("beingpranked")) {
+				boolean beingPranked = configMan.checkPlayer(args[0]);
+				if (beingPranked == false) {
+					sender.sendMessage(args[0] + " is not being pranked");
+				} else {
+					sender.sendMessage(args[0] + " is being pranked");
 				}
-				// Stop pranking a player.
-				if (command.getName().equalsIgnoreCase("stoppranking")) {
-					if (configMan.checkPlayer(args[0]) == null) {
-						sender.sendMessage(args[0] + " was never being pranked!");
-					} else {
-						configMan.removePlayer(args[0]);
-						sender.sendMessage(args[0] + " is no longer being pranked!");
-					}
-					return true;
-				}
-				// Check if a player is being pranked.
-				if (command.getName().equalsIgnoreCase("beingpranked")) {
-					String probability = configMan.checkPlayer(args[0]);
-					if (probability == null || probability.equalsIgnoreCase("0")) {
-						sender.sendMessage(args[0] + " is not being pranked");
-					} else {
-						sender.sendMessage(args[0] + " is being pranked with probability " + probability);
-					}
-					return true;
-				}
+				return true;
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * Method to check if a number is a valid probability. Throws a NumberFormatException
-	 * if it isn't. CBF making a Probability type.
-	 * @param prob The number to be checked.
-	 * @throws NumberFormatException Thrown if the number is not a valid probability.
-	 */
-	private void checkProbability(double prob) throws NumberFormatException {
-		if (!(prob <= 1.0 && prob >= 0.0)) {
-			throw new NumberFormatException();
-		}
 	}
 }
